@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epilogue | Quản lý Users</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <header class="header">
+            <h1><i class="fa-solid fa-users-gear"></i> Quản Lý Người Dùng</h1>
+            <p>Danh sách thông tin người dùng</p>
+        </header>
+
+        <div class="toolbar">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" placeholder="Tìm kiếm theo tên..." oninput="handleSearch()">
+            </div>
+            <button class="btn btn-primary" onclick="openUserModal()">
+                <i class="fa-solid fa-plus"></i> Thêm mới
+            </button>
+        </div>
+
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th width="5%">ID</th>
+                        <th width="25%">Họ Tên</th>
+                        <th width="30%">Email</th>
+                        <th width="20%">Số điện thoại</th>
+                        <th width="20%" class="text-center">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody"></tbody>
+            </table>
+        </div>
+        
+        <div id="loading" class="loading-spinner" style="display: none;">
+            <i class="fa-solid fa-circle-notch fa-spin"></i> Đang tải dữ liệu...
+        </div>
+
+        <div class="pagination-container">
+            <button class="btn-page" onclick="changePage(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+            <span id="pageIndicator">Trang 1</span>
+            <button class="btn-page" onclick="changePage(1)"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="modal" id="userModal">
+        <div class="modal-header">
+            <h2 id="modalTitle">Thông tin người dùng</h2>
+            <button class="close-btn" onclick="closeUserModal()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" id="userId">
+            <div class="form-group">
+                <label><i class="fa-solid fa-user"></i> Họ tên</label>
+                <input type="text" id="userName" placeholder="Nhập họ tên...">
+            </div>
+            <div class="form-group">
+                <label><i class="fa-solid fa-envelope"></i> Email</label>
+                <input type="email" id="userEmail" placeholder="Nhập email...">
+            </div>
+            <div class="form-group">
+                <label><i class="fa-solid fa-phone"></i> Số điện thoại</label>
+                <input type="text" id="userPhone" placeholder="Nhập số điện thoại...">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeUserModal()">Hủy bỏ</button>
+            <button class="btn btn-primary" onclick="saveUser()">
+                <i class="fa-solid fa-floppy-disk"></i> Lưu lại
+            </button>
+        </div>
+    </div>
+
+    <div class="modal" id="messageModal" style="max-width: 400px; text-align: center;">
+        <div class="modal-body" style="padding-top: 30px;">
+            <div id="msgIcon" style="font-size: 3rem; margin-bottom: 15px;"></div>
+            <h3 id="msgTitle" style="margin-bottom: 10px;">Tiêu đề</h3>
+            <p id="msgContent" style="color: #666;">Nội dung thông báo</p>
+        </div>
+        <div class="modal-footer" style="justify-content: center; border-top: none; padding-bottom: 25px;">
+            <button class="btn btn-secondary" id="msgCancelBtn" onclick="closeMessageModal()">Hủy</button>
+            <button class="btn btn-primary" id="msgConfirmBtn">Đồng ý</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
