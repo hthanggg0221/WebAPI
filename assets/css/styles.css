@@ -151,6 +151,15 @@ tbody tr:hover {
     background-color: #f1f5f9;
 }
 
+tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+tbody tr:hover {
+    background-color: #e3f2fd;
+    transition: background-color 0.2s ease-in-out;
+}
+
 .text-center {
     text-align: center;
 }
